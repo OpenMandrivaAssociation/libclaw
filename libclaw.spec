@@ -11,7 +11,7 @@ Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:  file
+Requires:	libjpeg62 libpng
 
 %description
 CLAW is a C++ Library Absolutely Wonderful providing useful classes 
@@ -22,6 +22,7 @@ sockets implemented as std::stream and more.
 %package devel
 Summary: development package for libclaw
 Group: Development/C
+Requires: libjpeg62-devel libpng-devel
 
 %description devel
 This package provides the necessary development headers and libraries
@@ -30,6 +31,7 @@ to allow you to build programs that use libclaw.
 %package cmake
 Summary: CMake module
 Group: Development/C
+Requires: %{name}-devel cmake
 
 %description cmake
 This package provides CMake module.
