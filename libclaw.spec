@@ -1,6 +1,6 @@
 %define	name	libclaw
 %define	version	1.5.0b
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -27,14 +27,6 @@ Requires: jpeg-devel libpng-devel
 %description devel
 This package provides the necessary development headers and libraries
 to allow you to build programs that use libclaw.
-
-%package cmake
-Summary: CMake module
-Group: Development/C
-Requires: %{name}-devel cmake
-
-%description cmake
-This package provides CMake module.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -66,7 +58,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %_includedir/claw
 %_bindir/claw-config
-
-%files cmake
-%defattr(-, root, root)
 %_datadir/cmake-2.5/Modules/FindCLAW.cmake
