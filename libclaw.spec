@@ -38,6 +38,7 @@ This package provides CMake module.
 
 %prep
 %setup -q -n %{name}-%{version}
+sed -ie 's/CLAW_INSTALLDIR_LIB lib/CLAW_INSTALLDIR_LIB %_lib/' CMakeLists.txt
 
 %build
 cmake -D CMAKE_INSTALL_PREFIX=%_prefix .
