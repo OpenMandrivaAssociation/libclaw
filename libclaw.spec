@@ -8,7 +8,7 @@ Release:	%{release}
 Summary:	C++ Library Absolutely Wonderful 
 License:	GPL
 Group:		System/Libraries
-URL:		http://libclaw.sourceforge.net
+URL:		http://libclaw.sourceforge.net/
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	cmake jpeg-devel libpng-devel
