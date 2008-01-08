@@ -53,11 +53,8 @@ rm -rf  $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -n %name 
-%__ldconfig
-
-%postun -n %name 
-%__ldconfig
+%post -n %name -p /sbin/ldconfig
+%postun -n %name -p /sbin/ldconfig
 
 %files 
 %defattr(-, root, root)
