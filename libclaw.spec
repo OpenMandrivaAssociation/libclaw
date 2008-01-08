@@ -11,7 +11,6 @@ Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires:	libjpeg62 libpng
 BuildRequires:	cmake libjpeg62-devel libpng-devel
 
 %description
