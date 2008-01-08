@@ -12,7 +12,7 @@ URL:		http://libclaw.sourceforge.net
 Source0:	%{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	libjpeg62 libpng
-BuildRequires:	cmake
+BuildRequires:	cmake libjpeg62-devel libpng-devel
 
 %description
 CLAW is a C++ Library Absolutely Wonderful providing useful classes 
