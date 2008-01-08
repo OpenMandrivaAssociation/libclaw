@@ -23,6 +23,7 @@ sockets implemented as std::stream and more.
 Summary: development package for libclaw
 Group: Development/C
 Requires: jpeg-devel libpng-devel
+Requires: %{name} = %{version}
 
 %description devel
 This package provides the necessary development headers and libraries
