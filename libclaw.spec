@@ -20,7 +20,7 @@ tools, including image manipulation, a generic alpha-beta algorithm,
 sockets implemented as std::stream and more.
 
 %package devel
-Summary: development package for libclaw
+Summary: Development package for libclaw
 Group: Development/C
 Requires: jpeg-devel libpng-devel
 Requires: %{name} = %{version}
