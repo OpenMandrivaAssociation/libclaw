@@ -1,6 +1,6 @@
 %define	name	libclaw
 %define	version	1.5.2b
-%define	release	%mkrel 1
+%define	release	%mkrel 3
 
 Name:		%{name}
 Version:	%{version}
