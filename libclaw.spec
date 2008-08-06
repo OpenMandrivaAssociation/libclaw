@@ -1,17 +1,19 @@
 %define	name	libclaw
-%define	version	1.5.2b
-%define	release	%mkrel 3
+%define	version	1.5.3
+%define	release	%mkrel 1
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	C++ Library Absolutely Wonderful 
-License:	GPL
+License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net/
 Source0:	%{name}-%{version}.tar.bz2
+Patch0:		libclaw-1.5.3-fix-libdir.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	cmake jpeg-devel libpng-devel
+BuildRequires:	doxygen
 
 %description
 CLAW is a C++ Library Absolutely Wonderful providing useful classes 
@@ -19,48 +21,66 @@ from the simplest AVL binary search trees to the complex meta programming
 tools, including image manipulation, a generic alpha-beta algorithm, 
 sockets implemented as std::stream and more.
 
-%package devel
+#-----------------------------------------------------------------------
+
+%define major 1
+%define libname %mklibname claw 1
+
+%package -n %libname
+Summary: Library files for libclaw
+Group: System/Libraries
+Obsoletes: %name < %version
+
+%description -n %libname
+CLAW is a C++ Library Absolutely Wonderful providing useful classes
+from the simplest AVL binary search trees to the complex meta programming
+tools, including image manipulation, a generic alpha-beta algorithm,
+sockets implemented as std::stream and more.
+
+%files -n %libname
+%defattr(-, root, root)
+%{_libdir}/*.so.%{major}*
+
+#-----------------------------------------------------------------------
+
+%define develname %mklibname -d claw
+
+%package -n %develname
 Summary: Development package for libclaw
 Group: Development/C
 Requires: jpeg-devel libpng-devel
-Requires: %{name} = %{version}
+Requires: %{libname} = %{version}
+Obsoletes: %{name}-devel < %{version}
+Provides: %{name}-devel = %{version}
 
-%description devel
+%description -n %develname
 This package provides the necessary development headers and libraries
 to allow you to build programs that use libclaw.
 
+%files -n %develname
+%defattr(-, root, root)
+%doc ChangeLog build/doc/html
+%_libdir/*.so
+%_libdir/*.a
+%_includedir/claw
+%_bindir/claw-config
+%_datadir/cmake-2.6/Modules/FindCLAW.cmake
+
+#-----------------------------------------------------------------------
+
 %prep
 %setup -q -n %{name}-%{version}
-sed -ie 's/CLAW_INSTALLDIR_LIB lib/CLAW_INSTALLDIR_LIB %_lib/' CMakeLists.txt
+%patch0 -p0
 
 %build
-cmake -D CMAKE_INSTALL_PREFIX=%_prefix .
+%cmake
 %make
 
 %install
 rm -rf  $RPM_BUILD_ROOT
+%makeinstall_std -C build
 
-%makeinstall_std
-
-# install files
+rm -fr %buildroot%_datadir/doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post -n %name -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %name -p /sbin/ldconfig
-%endif
-
-%files 
-%defattr(-, root, root)
-%doc COPYING
-%{_libdir}/*.so
-
-%files devel
-%defattr(-, root, root)
-%_includedir/claw
-%_bindir/claw-config
-%_datadir/cmake-2.5/Modules/FindCLAW.cmake
