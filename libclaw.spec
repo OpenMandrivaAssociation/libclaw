@@ -1,6 +1,6 @@
 %define	name	libclaw
 %define	version	1.5.3
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -64,7 +64,7 @@ to allow you to build programs that use libclaw.
 %_libdir/*.a
 %_includedir/claw
 %_bindir/claw-config
-%_datadir/cmake-2.6/Modules/FindCLAW.cmake
+%_datadir/cmake/Modules/FindCLAW.cmake
 
 #-----------------------------------------------------------------------
 
