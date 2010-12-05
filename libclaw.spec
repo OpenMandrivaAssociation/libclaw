@@ -10,6 +10,7 @@ License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/libclaw/libclaw/%{name}-%{version}.tar.gz
+Patch0:		libclaw-1.6.1-libdir.patch
 BuildRequires:	cmake
 BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
@@ -46,16 +47,17 @@ to allow you to build programs that use libclaw.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p0
 
 %build
-%cmake -DCLAW_INSTALLDIR_LIB=%_lib
+%cmake
 %make
 
 %install
 rm -rf  %{buildroot}
 %makeinstall_std -C build
 
-rm -f %buildroot%_datadir/doc
+rm -fr %buildroot%_datadir/doc
 
 %find_lang %name
 
