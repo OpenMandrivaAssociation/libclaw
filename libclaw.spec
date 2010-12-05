@@ -4,13 +4,12 @@
 
 Summary:	C++ Library Absolutely Wonderful 
 Name:		libclaw
-Version:	1.5.4
-Release:	%mkrel 2
+Version:	1.6.1
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/project/libclaw/libclaw/%{name}-%{version}.tar.bz2
-Patch0:		libclaw-1.5.3-fix-libdir.patch
+Source0:	http://downloads.sourceforge.net/project/libclaw/libclaw/%{name}-%{version}.tar.gz
 BuildRequires:	cmake
 BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
@@ -26,7 +25,7 @@ sockets implemented as std::stream and more.
 %package -n %{libname}
 Summary:	Library files for libclaw
 Group:		System/Libraries
-Obsoletes:	%{name} < %{version}
+Requires:	%{name} = %{version}
 
 %description -n %{libname}
 CLAW is a C++ Library Absolutely Wonderful providing useful classes
@@ -37,7 +36,6 @@ sockets implemented as std::stream and more.
 %package -n %{develname}
 Summary:	Development package for libclaw
 Group:		Development/C
-Requires:	jpeg-devel libpng-devel
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	%{name}-devel < %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
@@ -48,20 +46,24 @@ to allow you to build programs that use libclaw.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p0
 
 %build
-%cmake
+%cmake -DCLAW_INSTALLDIR_LIB=%_lib
 %make
 
 %install
 rm -rf  %{buildroot}
 %makeinstall_std -C build
 
-rm -fr %{buildroot}%{_datadir}/doc
+rm -f %buildroot%_datadir/doc
+
+%find_lang %name
 
 %clean
 rm -rf %{buildroot}
+
+%files -f %name.lang
+%defattr(-, root, root)
 
 %files -n %{libname}
 %defattr(-, root, root)
