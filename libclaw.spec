@@ -14,6 +14,7 @@ Patch0:		libclaw-1.7.0-libdir.patch
 Patch1:		libclaw-1.7.0-zlib.patch
 Patch2:		libclaw-1.6.1-nostrip.patch
 BuildRequires:	cmake
+BuildRequires:	boost-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	doxygen
