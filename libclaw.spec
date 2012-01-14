@@ -1,21 +1,22 @@
-%define major 1
-%define libname %mklibname claw 1
-%define develname %mklibname claw -d
+%define		major 1
+%define		libname %mklibname claw 1
+%define		develname %mklibname claw -d
 
 Summary:	C++ Library Absolutely Wonderful 
 Name:		libclaw
-Version:	1.6.1
+Version:	1.7.0
 Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/libclaw/libclaw/%{name}-%{version}.tar.gz
-Patch0:		libclaw-1.6.1-libdir.patch
+Patch0:		libclaw-1.7.0-libdir.patch
+Patch1:		libclaw-1.7.0-zlib.patch
+Patch2:		libclaw-1.6.1-nostrip.patch
 BuildRequires:	cmake
 BuildRequires:	jpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	doxygen
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 CLAW is a C++ Library Absolutely Wonderful providing useful classes 
@@ -47,24 +48,29 @@ to allow you to build programs that use libclaw.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p0
+%patch0 -p1 -b .libdir~
+%patch1 -p1 -b .zlib~
+%patch2 -p1 -b .nostrip~
 
 %build
 %cmake
 %make
 
 %install
-rm -rf  %{buildroot}
+%__rm -rf  %{buildroot}
 %makeinstall_std -C build
 
-rm -fr %buildroot%_datadir/doc
+rm -fr %{buildroot}%{_datadir}/doc
 
-%find_lang %name
+%__mkdir_p %{buildroot}%{_datadir}/cmake/Modules
+%__mv %{buildroot}%{_datadir}/cmake/libclaw/libclaw-config.cmake %{buildroot}%{_datadir}/cmake/Modules/Findlibclaw.cmake
+
+%find_lang %{name}
 
 %clean
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 
-%files -f %name.lang
+%files -f %{name}.lang
 %defattr(-, root, root)
 
 %files -n %{libname}
@@ -78,4 +84,4 @@ rm -rf %{buildroot}
 %{_libdir}/*.a
 %{_includedir}/claw
 %{_bindir}/claw-config
-%{_datadir}/cmake/Modules/FindCLAW.cmake
+%{_datadir}/cmake/Modules/Findlibclaw.cmake
