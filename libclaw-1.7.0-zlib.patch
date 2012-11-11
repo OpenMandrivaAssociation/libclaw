@@ -1,0 +1,11 @@
+diff -urN libclaw-1.7.0/claw/image.hpp libclaw-1.7.0-patched/claw/image.hpp
+--- libclaw-1.7.0/claw/image.hpp	2011-06-12 21:01:53.000000000 +1100
++++ libclaw-1.7.0-patched/claw/image.hpp	2012-01-14 12:11:19.152564991 +1100
+@@ -37,6 +37,7 @@
+ #include <iterator>
+ #include <iostream>
+ #include <cstddef>
++#include <zlib.h>
+ 
+ namespace claw
+ {

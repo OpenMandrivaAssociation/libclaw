@@ -1,0 +1,12 @@
+diff -urN libclaw-1.7.0/CMakeLists.txt libclaw-1.7.0-patched/CMakeLists.txt
+--- libclaw-1.7.0/CMakeLists.txt	2011-08-24 08:10:55.000000000 +1100
++++ libclaw-1.7.0-patched/CMakeLists.txt	2012-01-14 11:29:15.515094813 +1100
+@@ -30,7 +30,7 @@
+ set( CLAW_CODE_DIR claw/code/ )
+ set( CLAW_INCLUDE_DIRECTORY "${CMAKE_INSTALL_PREFIX}/include/" )
+ set( CLAW_INSTALLDIR_SOURCE include/claw/ )
+-set( CLAW_INSTALLDIR_LIB lib/ )
++set( CLAW_INSTALLDIR_LIB lib${LIB_SUFFIX}/ )
+ set( CLAW_INSTALLDIR_DOC share/doc/libclaw${CLAW_VERSION_MAJOR}/ )
+ set( CLAW_TRANSLATIONS_INSTALL_DIR "share/locale" )
+ set( CLAW_EXECUTABLE_DIR bin/ )
