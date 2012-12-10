@@ -86,3 +86,64 @@ rm -fr %{buildroot}%{_datadir}/doc
 %{_includedir}/claw
 %{_bindir}/claw-config
 %{_datadir}/cmake/Modules/Findlibclaw.cmake
+
+
+%changelog
+* Sat Jan 14 2012 Andrey Bondrov <abondrov@mandriva.org> 1.7.0-1mdv2011.0
++ Revision: 760782
+- Update BuildRequires
+- New version 1.7.0
+
+* Sun Dec 05 2010 Funda Wang <fwang@mandriva.org> 1.6.1-1mdv2011.0
++ Revision: 609856
+- fix libdir
+- new version 1.6.1
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - rebuild
+
+* Sat Sep 26 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 1.5.4-1mdv2010.0
++ Revision: 449506
+- update to new version 1.5.4
+- spec file clean
+
+* Thu Mar 26 2009 Funda Wang <fwang@mandriva.org> 1.5.3-2mdv2009.1
++ Revision: 361254
+- rebuild for new cmake
+
+* Wed Aug 06 2008 Funda Wang <fwang@mandriva.org> 1.5.3-1mdv2009.0
++ Revision: 264647
+- New version 1.5.3
+- use versioned lib package
+- fix libdir suffix
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+    - fix summary-not-capitalized
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Mon Jan 14 2008 Olivier Blin <blino@mandriva.org> 1.5.2b-1mdv2008.1
++ Revision: 151138
+- 1.5.2b
+
+* Tue Jan 08 2008 Olivier Blin <blino@mandriva.org> 1.5.0b-2mdv2008.1
++ Revision: 146855
+- require library in devel package
+- merge cmake file in devel package (like pkgconfig files)
+
+* Tue Jan 08 2008 Olivier Blin <blino@mandriva.org> 1.5.0b-1mdv2008.1
++ Revision: 146644
+- fix libdir for x86_64
+- fix jpeg-devel requires
+- fix ldconfig calls (there is no __ldconfig macro)
+- drop hardcoded requires
+- fix buildrequires
+
+  + Anne Nicolas <ennael@mandriva.org>
+    - add  buildrequire
+    - clean requires
+    - import libclaw
+
+
