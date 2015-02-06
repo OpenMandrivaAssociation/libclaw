@@ -5,7 +5,7 @@
 Summary:	C++ Library Absolutely Wonderful 
 Name:		libclaw
 Version:	1.7.0
-Release:	%mkrel 1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://libclaw.sourceforge.net/
