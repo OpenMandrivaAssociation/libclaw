@@ -1,0 +1,52 @@
+diff -up libclaw-1.7.4/claw/CMakeLists.txt.omv~ libclaw-1.7.4/claw/CMakeLists.txt
+diff -up libclaw-1.7.4/claw/code/configuration_file.cpp.omv~ libclaw-1.7.4/claw/code/configuration_file.cpp
+--- libclaw-1.7.4/claw/code/configuration_file.cpp.omv~	2022-09-27 17:41:12.875444725 +0200
++++ libclaw-1.7.4/claw/code/configuration_file.cpp	2022-09-27 17:41:21.191494728 +0200
+@@ -441,7 +441,7 @@ claw::configuration_file::file_end() con
+ bool claw::configuration_file::get_line
+ ( std::istream& is, const syntax_description& syntax, std::string& line ) const
+ {
+-  bool result = text::getline(is, line);
++  bool result = (bool)text::getline(is, line);
+ 
+   if ( result )
+     {
+diff -up libclaw-1.7.4/claw/code/tween/single_tweener.cpp.omv~ libclaw-1.7.4/claw/code/tween/single_tweener.cpp
+diff -up libclaw-1.7.4/claw/impl/box_2d.tpp.omv~ libclaw-1.7.4/claw/impl/box_2d.tpp
+--- libclaw-1.7.4/claw/impl/box_2d.tpp.omv~	2022-09-27 17:41:37.512592848 +0200
++++ libclaw-1.7.4/claw/impl/box_2d.tpp	2022-09-27 17:41:44.724636195 +0200
+@@ -136,8 +136,8 @@ template<typename U>
+ claw::math::box_2d<U> claw::math::box_2d<T>::cast_value_type_to() const
+ {
+   return claw::math::box_2d<U>
+-    ( first_point.cast_value_type_to<U>(),
+-      second_point.cast_value_type_to<U>() );
++    ( first_point.template cast_value_type_to<U>(),
++      second_point.template cast_value_type_to<U>() );
+ } // box_2d::cast_value_type_to()
+ 
+ /*----------------------------------------------------------------------------*/
+diff -up libclaw-1.7.4/claw/impl/rectangle.tpp.omv~ libclaw-1.7.4/claw/impl/rectangle.tpp
+--- libclaw-1.7.4/claw/impl/rectangle.tpp.omv~	2022-09-27 17:41:52.664683909 +0200
++++ libclaw-1.7.4/claw/impl/rectangle.tpp	2022-09-27 17:41:59.320723906 +0200
+@@ -140,7 +140,7 @@ template<typename U>
+ claw::math::rectangle<U> claw::math::rectangle<T>::cast_value_type_to() const
+ {
+   return claw::math::rectangle<U>
+-    ( position.cast_value_type_to<U>(), (U)width, (U)height );
++    ( position.template cast_value_type_to<U>(), (U)width, (U)height );
+ } // rectangle::cast_value_type_to()
+ 
+ /*----------------------------------------------------------------------------*/
+diff -up libclaw-1.7.4/CMakeLists.txt.omv~ libclaw-1.7.4/CMakeLists.txt
+--- libclaw-1.7.4/CMakeLists.txt.omv~	2022-09-27 17:45:37.774034265 +0200
++++ libclaw-1.7.4/CMakeLists.txt	2022-09-27 17:47:17.962634030 +0200
+@@ -204,6 +204,8 @@ add_library( claw_graphic SHARED ${CLAW_
+ add_library( claw_graphic-static STATIC ${CLAW_GRAPHIC_SOURCES} )
+ target_link_libraries(claw_graphic ${CLAW_GRAPHIC_LIBRARIES})
+ 
++set_source_files_properties(${CLAW_CODE_DIR}tween/single_tweener.cpp PROPERTIES COMPILE_OPTIONS "-std=c++03")
++
+ # tween
+ set( CLAW_TWEEN_SOURCES
+   ${CLAW_CODE_DIR}tween/base_tweener.cpp
