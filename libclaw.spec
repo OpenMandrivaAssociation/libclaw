@@ -8,7 +8,7 @@ Version:	1.7.4
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://libclaw.sourceforge.net/
+URL:		https://libclaw.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/libclaw/libclaw/%{name}-%{version}.tar.gz
 Patch0:		libclaw-1.7.0-libdir.patch
 Patch1:		libclaw-1.7.0-zlib.patch
